@@ -7,13 +7,15 @@ use \maglev\MagLevPhp;
  * PersistencePhpWrapper
  *
  * Copyright Mind Powered Corporation 2020
+ * 
+ * https://mindpowered.dev/
  */
 
 
 /**
  * PersistencePhpWrapper
  *
- * This is a class
+ * Persistence
  */
 class PersistencePhpWrapper
 {

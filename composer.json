@@ -1,18 +1,18 @@
 {
-	"name": "mindpowered/persistence",
-	"version": "0.0.9",
-	"description": "persistence",
-	"license": "proprietary",
-	"autoload": {
-		"psr-4": {
-			"haxe\\": "lib/haxe/",
-			"persistence\\": "lib/persistence/",
-			"mindpowered\\wrappers\\": "lib/wrappers/",
-			"php\\": "lib/php/",
-			"": "lib/"
-		}
-	},
-	"require": {
-		"mindpowered/maglev": "*"
-	}
+    "name": "mindpowered/persistence",
+    "version": "0.0.10",
+    "description": "Persistence",
+    "license": "CPAL-1.0",
+    "autoload": {
+        "psr-4": {
+            "haxe\\": "lib/haxe/",
+            "persistence\\": "lib/persistence/",
+            "mindpowered\\wrappers\\": "lib/wrappers/",
+            "php\\": "lib/php/",
+            "": "lib/"
+        }
+    },
+    "require": {
+        "mindpowered/maglev": "*"
+    }
 }
