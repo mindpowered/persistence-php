@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1691168246"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-5353746"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1691168246" class="accordion-body collapse in">
+            <div id="namespace-5353746" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-866630067"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-123524006"></a>
                                 <a href="../namespaces/mindpowered.html" style="margin-left: 30px; padding-left: 0">mindpowered</a>
             </div>
-            <div id="namespace-866630067" class="accordion-body collapse ">
+            <div id="namespace-123524006" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1358411679"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-465410056"></a>
                                 <a href="../namespaces/mindpowered.wrappers.html" style="margin-left: 30px; padding-left: 0">wrappers</a>
             </div>
-            <div id="namespace-1358411679" class="accordion-body collapse ">
+            <div id="namespace-465410056" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -206,7 +206,9 @@
 
                     <h1><small>\mindpowered\wrappers</small>PersistencePhpWrapper</h1>
                     <p><em>PersistencePhpWrapper</em></p>
-                    <p>Persistence</p>
+                    <p>Provides a way of storing data for mindpowered packages.
+When mindpowered packages need to persist data, they will use Get and Mutate, which in turn will call the Mutators and Getters you have set up.
+You can set up the Mutators and Getters however you like whether to access a database such as MySQL or MongoDB, or simply write and read from text files.</p>
                     
                                         
                     <section id="summary">
@@ -299,10 +301,33 @@
             <article class="method">
                 <h3 class="public ">AddMutator()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddMutator() : void</pre>
-                <p><em>TBD</em></p>
+                <pre class="signature" style="margin-right: 54px;">AddMutator(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$updateMapper</span>) : void</pre>
+                <p><em>Set up a Mutator to change stored data</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$recordType </td>
+                                <td><p>type of record being changed (eg. databsae table name)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$operationName </td>
+                                <td><p>action being performed on the record (eg. insert, update)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$strategyMethod </td>
+                                <td><p>method to call to actually perform the mutation</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$updateMapper </td>
+                                <td><p>method to call on recordData before calling strategyMethod with the results</p></td>
+                            </tr>
+                                            </table>
                 
                 
                 
@@ -327,10 +352,38 @@
             <article class="method">
                 <h3 class="public ">AddGetter()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddGetter() : void</pre>
-                <p><em>TBD</em></p>
+                <pre class="signature" style="margin-right: 54px;">AddGetter(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$queryMapper</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$resultMapper</span>) : void</pre>
+                <p><em>Set up a Getter to retrieve data</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$recordType </td>
+                                <td><p>type of record being retrieved (eg. databsae table name)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$operationName </td>
+                                <td><p>query being performed for the record type (eg. findById, findByName, findActive, getInsertedId)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$strategyMethod </td>
+                                <td><p>method to call to actually perform the data retrieval</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$queryMapper </td>
+                                <td><p>method to call on queryValues before calling strategyMethod with the results</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$resultMapper </td>
+                                <td><p>method to call on data returned from the strategyMethod before returning the results</p></td>
+                            </tr>
+                                            </table>
                 
                 
                 
@@ -355,10 +408,28 @@
             <article class="method">
                 <h3 class="public ">Mutate()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">Mutate() : void</pre>
+                <pre class="signature" style="margin-right: 54px;">Mutate(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$recordData</span>) : void</pre>
                 <p><em>TBD</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$recordType </td>
+                                <td><p>type of record being changed (eg. databsae table name)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$operationName </td>
+                                <td><p>action being performed on the record (eg. insert, update)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$recordData </td>
+                                <td><p>data being updated or saved by passing through updateMapper and then strategyMethod</p></td>
+                            </tr>
+                                            </table>
                 
                 
                 
@@ -383,13 +454,33 @@
             <article class="method">
                 <h3 class="public ">Get()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">Get() : void</pre>
+                <pre class="signature" style="margin-right: 54px;">Get(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$queryValues</span>) : \mindpowered\wrappers\...</pre>
                 <p><em>TBD</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$recordType </td>
+                                <td><p>type of record being retrieved (eg. databsae table name)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$operationName </td>
+                                <td><p>query being performed for the record type (eg. findById, findByName, findActive, getInsertedId)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$queryValues </td>
+                                <td><p>values that will be passed through queryMapper and then strategyMethod to perform the query</p></td>
+                            </tr>
+                                            </table>
                 
                 
-                
+                                    <h4>Returns</h4>
+                    \mindpowered\wrappers\...
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -455,7 +546,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 3rd, 2020 at 18:25.
+                    on October 6th, 2020 at 00:51.
                 </section>
             </section>
         </section>
