@@ -55,7 +55,7 @@ public function AddGetter($recordType, $operationName, $strategyMethod, $queryMa
 }
 
 /**
- * TBD
+ * Use a Mutator to change stored data
  * @param unknown_type $recordType type of record being changed (eg. databsae table name)
  * @param unknown_type $operationName action being performed on the record (eg. insert, update)
  * @param unknown_type $recordData data being updated or saved by passing through updateMapper and then strategyMethod
@@ -70,7 +70,7 @@ public function Mutate($recordType, $operationName, $recordData)
 }
 
 /**
- * TBD
+ * Use a Getter to retrieve data
  * @param unknown_type $recordType type of record being retrieved (eg. databsae table name)
  * @param unknown_type $operationName query being performed for the record type (eg. findById, findByName, findActive, getInsertedId)
  * @param unknown_type $queryValues values that will be passed through queryMapper and then strategyMethod to perform the query
