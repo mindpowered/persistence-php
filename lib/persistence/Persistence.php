@@ -131,17 +131,17 @@ class Persistence {
 	public function addGetter ($recordType, $operationName, $strategyMethod, $queryMapper = null, $resultMapper = null) {
 		#/src/persistence/Persistence.hx:70: lines 70-72
 		if ($queryMapper === null) {
-			#/src/persistence/Persistence.hx:71: characters 4-37
+			#/src/persistence/Persistence.hx:71: characters 4-41
 			$queryMapper = function ($v) {
-				#/src/persistence/Persistence.hx:71: characters 29-37
+				#/src/persistence/Persistence.hx:71: characters 33-41
 				return $v;
 			};
 		}
 		#/src/persistence/Persistence.hx:73: lines 73-75
 		if ($resultMapper === null) {
-			#/src/persistence/Persistence.hx:74: characters 4-38
+			#/src/persistence/Persistence.hx:74: characters 4-42
 			$resultMapper = function ($v) {
-				#/src/persistence/Persistence.hx:74: characters 30-38
+				#/src/persistence/Persistence.hx:74: characters 34-42
 				return $v;
 			};
 		}
@@ -164,9 +164,9 @@ class Persistence {
 	public function addMutator ($recordType, $operationName, $strategyMethod, $updateMapper = null) {
 		#/src/persistence/Persistence.hx:62: lines 62-64
 		if ($updateMapper === null) {
-			#/src/persistence/Persistence.hx:63: characters 4-38
+			#/src/persistence/Persistence.hx:63: characters 4-42
 			$updateMapper = function ($v) {
-				#/src/persistence/Persistence.hx:63: characters 30-38
+				#/src/persistence/Persistence.hx:63: characters 34-42
 				return $v;
 			};
 		}
