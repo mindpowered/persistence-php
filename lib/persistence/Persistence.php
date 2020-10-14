@@ -84,23 +84,23 @@ class Persistence {
 			#/src/persistence/Persistence.hx:39: characters 4-31
 			$queryMapper = null;
 			#/src/persistence/Persistence.hx:40: lines 40-42
-			if ($args->length > 4) {
+			if ($args->length >= 4) {
 				#/src/persistence/Persistence.hx:41: characters 5-26
 				$queryMapper = ($args->arr[3] ?? null);
 			}
 			#/src/persistence/Persistence.hx:43: characters 4-32
 			$resultMapper = null;
 			#/src/persistence/Persistence.hx:44: lines 44-46
-			if ($args->length > 5) {
+			if ($args->length >= 5) {
 				#/src/persistence/Persistence.hx:45: characters 5-27
 				$resultMapper = ($args->arr[4] ?? null);
 			}
 			#/src/persistence/Persistence.hx:47: characters 4-49
 			$useQueryValuesAsParams = null;
 			#/src/persistence/Persistence.hx:48: lines 48-50
-			if ($args->length > 6) {
-				#/src/persistence/Persistence.hx:49: characters 5-27
-				$resultMapper = ($args->arr[5] ?? null);
+			if ($args->length >= 6) {
+				#/src/persistence/Persistence.hx:49: characters 5-37
+				$useQueryValuesAsParams = ($args->arr[5] ?? null);
 			}
 			#/src/persistence/Persistence.hx:51: characters 4-112
 			$_gthis->addGetter($recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams);
