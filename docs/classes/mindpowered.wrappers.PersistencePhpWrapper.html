@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1868182706"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1492713287"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1868182706" class="accordion-body collapse in">
+            <div id="namespace-1492713287" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-552342274"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-28924506"></a>
                                 <a href="../namespaces/mindpowered.html" style="margin-left: 30px; padding-left: 0">mindpowered</a>
             </div>
-            <div id="namespace-552342274" class="accordion-body collapse ">
+            <div id="namespace-28924506" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-160643615"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1871330485"></a>
                                 <a href="../namespaces/mindpowered.wrappers.html" style="margin-left: 30px; padding-left: 0">wrappers</a>
             </div>
-            <div id="namespace-160643615" class="accordion-body collapse ">
+            <div id="namespace-1871330485" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -208,7 +208,8 @@
                     <p><em>PersistencePhpWrapper</em></p>
                     <p>Provides a way of storing data for mindpowered packages.
 When mindpowered packages need to persist data, they will use Get and Mutate, which in turn will call the Mutators and Getters you have set up.
-You can set up the Mutators and Getters however you like whether to access a database such as MySQL or MongoDB, or simply write and read from text files.</p>
+You can set up the Mutators and Getters however you like whether to access a database such as MySQL or MongoDB, or simply write and read from text files.
+Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data will be passed in as the first argument to the mapping function.</p>
                     
                                         
                     <section id="summary">
@@ -301,7 +302,7 @@ You can set up the Mutators and Getters however you like whether to access a dat
             <article class="method">
                 <h3 class="public ">AddMutator()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddMutator(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$updateMapper</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">AddMutator(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$updateMapper</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$useRecordDataAsParams</span>) : void</pre>
                 <p><em>Set up a Mutator to change stored data</em></p>
                 
 
@@ -326,6 +327,11 @@ You can set up the Mutators and Getters however you like whether to access a dat
                                 <td>\mindpowered\wrappers\unknown_type</td>
                                 <td>$updateMapper </td>
                                 <td><p>method to call on recordData before calling strategyMethod with the results</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$useRecordDataAsParams </td>
+                                <td><p>if set to true, the recordData will be passed as the arguments to strategyMethod, rather than as the first argument</p></td>
                             </tr>
                                             </table>
                 
@@ -352,7 +358,7 @@ You can set up the Mutators and Getters however you like whether to access a dat
             <article class="method">
                 <h3 class="public ">AddGetter()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddGetter(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$queryMapper</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$resultMapper</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">AddGetter(\mindpowered\wrappers\unknown_type  <span class="argument">$recordType</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$operationName</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$queryMapper</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$resultMapper</span>, \mindpowered\wrappers\unknown_type  <span class="argument">$useQueryValuesAsParams</span>) : void</pre>
                 <p><em>Set up a Getter to retrieve data</em></p>
                 
 
@@ -382,6 +388,11 @@ You can set up the Mutators and Getters however you like whether to access a dat
                                 <td>\mindpowered\wrappers\unknown_type</td>
                                 <td>$resultMapper </td>
                                 <td><p>method to call on data returned from the strategyMethod before returning the results</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mindpowered\wrappers\unknown_type</td>
+                                <td>$useQueryValuesAsParams </td>
+                                <td><p>if set to true, the queryValues will be passed as the arguments to strategyMethod, rather than as the first argument</p></td>
                             </tr>
                                             </table>
                 
@@ -546,7 +557,7 @@ You can set up the Mutators and Getters however you like whether to access a dat
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 11th, 2020 at 20:27.
+                    on October 14th, 2020 at 02:57.
                 </section>
             </section>
         </section>

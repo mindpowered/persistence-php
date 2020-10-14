@@ -18,6 +18,7 @@ use \maglev\MagLevPhp;
  * Provides a way of storing data for mindpowered packages.
  * When mindpowered packages need to persist data, they will use Get and Mutate, which in turn will call the Mutators and Getters you have set up.
  * You can set up the Mutators and Getters however you like whether to access a database such as MySQL or MongoDB, or simply write and read from text files.
+ * Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data will be passed in as the first argument to the mapping function.
  */
 class PersistencePhpWrapper
 {
@@ -27,12 +28,13 @@ class PersistencePhpWrapper
  * @param unknown_type $operationName action being performed on the record (eg. insert, update)
  * @param unknown_type $strategyMethod method to call to actually perform the mutation
  * @param unknown_type $updateMapper method to call on recordData before calling strategyMethod with the results
+ * @param unknown_type $useRecordDataAsParams if set to true, the recordData will be passed as the arguments to strategyMethod, rather than as the first argument
  * @return void
  */
-public function AddMutator($recordType, $operationName, $strategyMethod, $updateMapper)
+public function AddMutator($recordType, $operationName, $strategyMethod, $updateMapper, $useRecordDataAsParams)
 {
 	$bus = MagLevPhp::getInstance('default');
-	$args = [$recordType, $operationName, $strategyMethod, $updateMapper];
+	$args = [$recordType, $operationName, $strategyMethod, $updateMapper, $useRecordDataAsParams];
 	$ret = $bus->call('Persistence.AddMutator', $args);
 	return $ret;
 }
@@ -44,12 +46,13 @@ public function AddMutator($recordType, $operationName, $strategyMethod, $update
  * @param unknown_type $strategyMethod method to call to actually perform the data retrieval
  * @param unknown_type $queryMapper method to call on queryValues before calling strategyMethod with the results
  * @param unknown_type $resultMapper method to call on data returned from the strategyMethod before returning the results
+ * @param unknown_type $useQueryValuesAsParams if set to true, the queryValues will be passed as the arguments to strategyMethod, rather than as the first argument
  * @return void
  */
-public function AddGetter($recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper)
+public function AddGetter($recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams)
 {
 	$bus = MagLevPhp::getInstance('default');
-	$args = [$recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper];
+	$args = [$recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams];
 	$ret = $bus->call('Persistence.AddGetter', $args);
 	return $ret;
 }

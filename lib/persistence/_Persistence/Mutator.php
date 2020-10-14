@@ -27,51 +27,58 @@ class Mutator {
 	 * @var mixed
 	 */
 	public $updateMapper;
+	/**
+	 * @var bool
+	 */
+	public $useRecordDataAsParams;
 
 	/**
 	 * @param string $recordType
 	 * @param mixed $strategyMethod
 	 * @param mixed $updateMapper
+	 * @param bool $useRecordDataAsParams
 	 * 
 	 * @return void
 	 */
-	public function __construct ($recordType, $strategyMethod, $updateMapper) {
-		#/src/persistence/Persistence.hx:179: characters 7-77
+	public function __construct ($recordType, $strategyMethod, $updateMapper, $useRecordDataAsParams) {
+		#/src/persistence/Persistence.hx:205: characters 7-77
 		$tmp = null;
 		if (!is_string($strategyMethod)) {
-			#/src/persistence/Persistence.hx:179: characters 43-77
+			#/src/persistence/Persistence.hx:205: characters 43-77
 			$f = $strategyMethod;
-			#/src/persistence/Persistence.hx:179: characters 7-77
+			#/src/persistence/Persistence.hx:205: characters 7-77
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:179: lines 179-181
+		#/src/persistence/Persistence.hx:205: lines 205-207
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:180: characters 4-9
+			#/src/persistence/Persistence.hx:206: characters 4-9
 			throw Exception::thrown("strategyMethod must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:182: characters 7-73
+		#/src/persistence/Persistence.hx:208: characters 7-73
 		$tmp = null;
 		if (!is_string($updateMapper)) {
-			#/src/persistence/Persistence.hx:182: characters 41-73
+			#/src/persistence/Persistence.hx:208: characters 41-73
 			$f = $updateMapper;
-			#/src/persistence/Persistence.hx:182: characters 7-73
+			#/src/persistence/Persistence.hx:208: characters 7-73
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:182: lines 182-184
+		#/src/persistence/Persistence.hx:208: lines 208-210
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:183: characters 4-9
+			#/src/persistence/Persistence.hx:209: characters 4-9
 			throw Exception::thrown("updateMapper must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:185: characters 3-31
+		#/src/persistence/Persistence.hx:211: characters 3-31
 		$this->recordType = $recordType;
-		#/src/persistence/Persistence.hx:186: characters 3-39
+		#/src/persistence/Persistence.hx:212: characters 3-39
 		$this->strategyMethod = $strategyMethod;
-		#/src/persistence/Persistence.hx:187: characters 3-35
+		#/src/persistence/Persistence.hx:213: characters 3-35
 		$this->updateMapper = $updateMapper;
+		#/src/persistence/Persistence.hx:214: characters 3-53
+		$this->useRecordDataAsParams = $useRecordDataAsParams;
 	}
 
 	/**
