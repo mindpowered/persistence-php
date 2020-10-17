@@ -5,14 +5,25 @@
 
 namespace persistence;
 
+use \maglev\MagLevNumber;
+use \maglev\MagLevString;
 use \php\_Boot\HxAnon;
+use \maglev\MagLevFunction;
+use \maglev\MagLevNull;
 use \php\Boot;
 use \haxe\Exception;
+use \maglev\MagLevResult;
 use \persistence\_Persistence\Mutator;
+use \maglev\MagLevAny;
 use \persistence\_Persistence\Getter;
 use \maglev\MagLev;
+use \maglev\MagLevBoolean;
 use \php\_Boot\HxClosure;
 use \haxe\ds\StringMap;
+use \maglev\MagLevType;
+use \maglev\MagLevArray;
+use \php\_NativeIndexedArray\NativeIndexedArrayIterator;
+use \maglev\MagLevObject;
 
 /**
  * Persistence
@@ -38,7 +49,7 @@ class Persistence {
 	 * @return void
 	 */
 	public function __construct ($bus) {
-		#/src/persistence/Persistence.hx:16: lines 16-67
+		#/src/persistence/Persistence.hx:16: lines 16-68
 		$_gthis = $this;
 		#/src/persistence/Persistence.hx:17: characters 3-40
 		$this->mutators = new StringMap();
@@ -47,90 +58,92 @@ class Persistence {
 		#/src/persistence/Persistence.hx:19: characters 3-20
 		$this->maglev = $bus;
 		#/src/persistence/Persistence.hx:20: lines 20-34
-		$this->maglev->register("Persistence.AddMutator", function ($args) use (&$_gthis) {
-			#/src/persistence/Persistence.hx:21: characters 4-36
-			$recordType = ($args->arr[0] ?? null);
-			#/src/persistence/Persistence.hx:22: characters 4-39
-			$operationName = ($args->arr[1] ?? null);
-			#/src/persistence/Persistence.hx:23: characters 4-37
-			$strategyMethod = ($args->arr[2] ?? null);
+		$this->maglev->register("Persistence.AddMutator", MagLevFunction::fromFunction(function ($args) use (&$_gthis) {
+			#/src/persistence/Persistence.hx:21: characters 4-72
+			$recordType = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(0)))->getString();
+			#/src/persistence/Persistence.hx:22: characters 4-75
+			$operationName = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(1)))->getString();
+			#/src/persistence/Persistence.hx:23: characters 4-56
+			$strategyMethod = $_gthis->convertToHaxe($args->get(2));
 			#/src/persistence/Persistence.hx:24: characters 4-32
 			$updateMapper = null;
 			#/src/persistence/Persistence.hx:25: lines 25-27
-			if ($args->length > 3) {
-				#/src/persistence/Persistence.hx:26: characters 5-27
-				$updateMapper = ($args->arr[3] ?? null);
+			if ($args->size() > 3) {
+				#/src/persistence/Persistence.hx:26: characters 5-46
+				$updateMapper = $_gthis->convertToHaxe($args->get(3));
 			}
 			#/src/persistence/Persistence.hx:28: characters 4-48
 			$useRecordDataAsParams = null;
 			#/src/persistence/Persistence.hx:29: lines 29-31
-			if ($args->length > 4) {
-				#/src/persistence/Persistence.hx:30: characters 5-36
-				$useRecordDataAsParams = ($args->arr[4] ?? null);
+			if ($args->size() > 4) {
+				#/src/persistence/Persistence.hx:30: characters 5-55
+				$useRecordDataAsParams = $_gthis->convertToHaxe($args->get(4));
 			}
 			#/src/persistence/Persistence.hx:32: characters 4-99
 			$_gthis->addMutator($recordType, $operationName, $strategyMethod, $updateMapper, $useRecordDataAsParams);
-			#/src/persistence/Persistence.hx:33: characters 4-15
-			return true;
-		});
+			#/src/persistence/Persistence.hx:33: characters 4-64
+			return MagLevResult::fromResult(MagLevBoolean::fromBool(true));
+		}));
 		#/src/persistence/Persistence.hx:35: lines 35-53
-		$this->maglev->register("Persistence.AddGetter", function ($args) use (&$_gthis) {
-			#/src/persistence/Persistence.hx:36: characters 4-36
-			$recordType = ($args->arr[0] ?? null);
-			#/src/persistence/Persistence.hx:37: characters 4-39
-			$operationName = ($args->arr[1] ?? null);
-			#/src/persistence/Persistence.hx:38: characters 4-37
-			$strategyMethod = ($args->arr[2] ?? null);
+		$this->maglev->register("Persistence.AddGetter", MagLevFunction::fromFunction(function ($args) use (&$_gthis) {
+			#/src/persistence/Persistence.hx:36: characters 4-72
+			$recordType = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(0)))->getString();
+			#/src/persistence/Persistence.hx:37: characters 4-75
+			$operationName = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(1)))->getString();
+			#/src/persistence/Persistence.hx:38: characters 4-56
+			$strategyMethod = $_gthis->convertToHaxe($args->get(2));
 			#/src/persistence/Persistence.hx:39: characters 4-31
 			$queryMapper = null;
 			#/src/persistence/Persistence.hx:40: lines 40-42
-			if ($args->length >= 4) {
-				#/src/persistence/Persistence.hx:41: characters 5-26
-				$queryMapper = ($args->arr[3] ?? null);
+			if ($args->size() >= 4) {
+				#/src/persistence/Persistence.hx:41: characters 5-45
+				$queryMapper = $_gthis->convertToHaxe($args->get(3));
 			}
 			#/src/persistence/Persistence.hx:43: characters 4-32
 			$resultMapper = null;
 			#/src/persistence/Persistence.hx:44: lines 44-46
-			if ($args->length >= 5) {
-				#/src/persistence/Persistence.hx:45: characters 5-27
-				$resultMapper = ($args->arr[4] ?? null);
+			if ($args->size() >= 5) {
+				#/src/persistence/Persistence.hx:45: characters 5-46
+				$resultMapper = $_gthis->convertToHaxe($args->get(4));
 			}
 			#/src/persistence/Persistence.hx:47: characters 4-49
 			$useQueryValuesAsParams = null;
 			#/src/persistence/Persistence.hx:48: lines 48-50
-			if ($args->length >= 6) {
-				#/src/persistence/Persistence.hx:49: characters 5-37
-				$useQueryValuesAsParams = ($args->arr[5] ?? null);
+			if ($args->size() >= 6) {
+				#/src/persistence/Persistence.hx:49: characters 5-72
+				$useQueryValuesAsParams = (Boot::typedCast(Boot::getClass(MagLevBoolean::class), $args->get(5)))->getBool();
 			}
 			#/src/persistence/Persistence.hx:51: characters 4-112
 			$_gthis->addGetter($recordType, $operationName, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams);
-			#/src/persistence/Persistence.hx:52: characters 4-15
-			return true;
-		});
+			#/src/persistence/Persistence.hx:52: characters 4-64
+			return MagLevResult::fromResult(MagLevBoolean::fromBool(true));
+		}));
 		#/src/persistence/Persistence.hx:54: lines 54-60
-		$this->maglev->register("Persistence.Mutate", function ($args) use (&$_gthis) {
-			#/src/persistence/Persistence.hx:55: characters 4-36
-			$recordType = ($args->arr[0] ?? null);
-			#/src/persistence/Persistence.hx:56: characters 4-39
-			$operationName = ($args->arr[1] ?? null);
-			#/src/persistence/Persistence.hx:57: characters 4-33
-			$recordData = ($args->arr[2] ?? null);
+		$this->maglev->register("Persistence.Mutate", MagLevFunction::fromFunction(function ($args) use (&$_gthis) {
+			#/src/persistence/Persistence.hx:55: characters 4-72
+			$recordType = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(0)))->getString();
+			#/src/persistence/Persistence.hx:56: characters 4-75
+			$operationName = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(1)))->getString();
+			#/src/persistence/Persistence.hx:57: characters 4-52
+			$recordData = $_gthis->convertToHaxe($args->get(2));
 			#/src/persistence/Persistence.hx:58: characters 4-49
 			$_gthis->mutate($recordType, $operationName, $recordData);
-			#/src/persistence/Persistence.hx:59: characters 4-15
-			return true;
-		});
-		#/src/persistence/Persistence.hx:61: lines 61-66
-		$this->maglev->register("Persistence.Get", function ($args) use (&$_gthis) {
-			#/src/persistence/Persistence.hx:62: characters 4-36
-			$recordType = ($args->arr[0] ?? null);
-			#/src/persistence/Persistence.hx:63: characters 4-39
-			$operationName = ($args->arr[1] ?? null);
-			#/src/persistence/Persistence.hx:64: characters 4-34
-			$queryValues = ($args->arr[2] ?? null);
-			#/src/persistence/Persistence.hx:65: characters 4-54
-			return $_gthis->get($recordType, $operationName, $queryValues);
-		});
+			#/src/persistence/Persistence.hx:59: characters 4-64
+			return MagLevResult::fromResult(MagLevBoolean::fromBool(true));
+		}));
+		#/src/persistence/Persistence.hx:61: lines 61-67
+		$this->maglev->register("Persistence.Get", MagLevFunction::fromFunction(function ($args) use (&$_gthis) {
+			#/src/persistence/Persistence.hx:62: characters 4-72
+			$recordType = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(0)))->getString();
+			#/src/persistence/Persistence.hx:63: characters 4-75
+			$operationName = (Boot::typedCast(Boot::getClass(MagLevString::class), $args->get(1)))->getString();
+			#/src/persistence/Persistence.hx:64: characters 4-53
+			$queryValues = $_gthis->convertToHaxe($args->get(2));
+			#/src/persistence/Persistence.hx:65: characters 4-75
+			$ret = $_gthis->convertToMagLev($_gthis->get($recordType, $operationName, $queryValues));
+			#/src/persistence/Persistence.hx:66: characters 4-39
+			return MagLevResult::fromResult($ret);
+		}));
 	}
 
 	/**
@@ -144,30 +157,30 @@ class Persistence {
 	 * @return void
 	 */
 	public function addGetter ($recordType, $operationName, $strategyMethod, $queryMapper = null, $resultMapper = null, $useQueryValuesAsParams = null) {
-		#/src/persistence/Persistence.hx:81: lines 81-83
+		#/src/persistence/Persistence.hx:82: lines 82-84
 		if ($queryMapper === null) {
-			#/src/persistence/Persistence.hx:82: characters 4-41
+			#/src/persistence/Persistence.hx:83: characters 4-41
 			$queryMapper = function ($v) {
-				#/src/persistence/Persistence.hx:82: characters 33-41
+				#/src/persistence/Persistence.hx:83: characters 33-41
 				return $v;
 			};
 		}
-		#/src/persistence/Persistence.hx:84: lines 84-86
+		#/src/persistence/Persistence.hx:85: lines 85-87
 		if ($resultMapper === null) {
-			#/src/persistence/Persistence.hx:85: characters 4-42
+			#/src/persistence/Persistence.hx:86: characters 4-42
 			$resultMapper = function ($v) {
-				#/src/persistence/Persistence.hx:85: characters 34-42
+				#/src/persistence/Persistence.hx:86: characters 34-42
 				return $v;
 			};
 		}
-		#/src/persistence/Persistence.hx:87: lines 87-89
+		#/src/persistence/Persistence.hx:88: lines 88-90
 		if ($useQueryValuesAsParams === null) {
-			#/src/persistence/Persistence.hx:88: characters 4-34
+			#/src/persistence/Persistence.hx:89: characters 4-34
 			$useQueryValuesAsParams = false;
 		}
-		#/src/persistence/Persistence.hx:90: characters 3-106
+		#/src/persistence/Persistence.hx:91: characters 3-106
 		$getter = new Getter($recordType, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams);
-		#/src/persistence/Persistence.hx:91: characters 3-65
+		#/src/persistence/Persistence.hx:92: characters 3-65
 		$this1 = $this->getters;
 		$k = $this->calcKey($recordType, $operationName);
 		$this1->data[$k] = $getter;
@@ -183,22 +196,22 @@ class Persistence {
 	 * @return void
 	 */
 	public function addMutator ($recordType, $operationName, $strategyMethod, $updateMapper = null, $useRecordDataAsParams = null) {
-		#/src/persistence/Persistence.hx:70: lines 70-72
+		#/src/persistence/Persistence.hx:71: lines 71-73
 		if ($updateMapper === null) {
-			#/src/persistence/Persistence.hx:71: characters 4-42
+			#/src/persistence/Persistence.hx:72: characters 4-42
 			$updateMapper = function ($v) {
-				#/src/persistence/Persistence.hx:71: characters 34-42
+				#/src/persistence/Persistence.hx:72: characters 34-42
 				return $v;
 			};
 		}
-		#/src/persistence/Persistence.hx:73: lines 73-75
+		#/src/persistence/Persistence.hx:74: lines 74-76
 		if ($useRecordDataAsParams === null) {
-			#/src/persistence/Persistence.hx:74: characters 4-33
+			#/src/persistence/Persistence.hx:75: characters 4-33
 			$useRecordDataAsParams = false;
 		}
-		#/src/persistence/Persistence.hx:76: characters 3-94
+		#/src/persistence/Persistence.hx:77: characters 3-94
 		$mutator = new Mutator($recordType, $strategyMethod, $updateMapper, $useRecordDataAsParams);
-		#/src/persistence/Persistence.hx:77: characters 3-67
+		#/src/persistence/Persistence.hx:78: characters 3-67
 		$this1 = $this->mutators;
 		$k = $this->calcKey($recordType, $operationName);
 		$this1->data[$k] = $mutator;
@@ -211,8 +224,161 @@ class Persistence {
 	 * @return string
 	 */
 	public function calcKey ($recordType, $operationName) {
-		#/src/persistence/Persistence.hx:190: characters 3-42
+		#/src/persistence/Persistence.hx:191: characters 3-42
 		return ($recordType??'null') . "." . ($operationName??'null');
+	}
+
+	/**
+	 * @param MagLevAny $x
+	 * 
+	 * @return mixed
+	 */
+	public function convertToHaxe ($x) {
+		#/src/persistence/Persistence.hx:195: lines 195-232
+		if ($x->getType() === MagLevType::MagLevType_Null()) {
+			#/src/persistence/Persistence.hx:196: characters 4-15
+			return null;
+		} else if ($x->getType() === MagLevType::MagLevType_Boolean()) {
+			#/src/persistence/Persistence.hx:199: characters 4-35
+			$y = Boot::typedCast(Boot::getClass(MagLevBoolean::class), $x);
+			#/src/persistence/Persistence.hx:200: characters 4-22
+			return $y->getBool();
+		} else if ($x->getType() === MagLevType::MagLevType_String()) {
+			#/src/persistence/Persistence.hx:203: characters 4-34
+			$y = Boot::typedCast(Boot::getClass(MagLevString::class), $x);
+			#/src/persistence/Persistence.hx:204: characters 4-24
+			return $y->getString();
+		} else if ($x->getType() === MagLevType::MagLevType_Number()) {
+			#/src/persistence/Persistence.hx:207: characters 4-34
+			$y = Boot::typedCast(Boot::getClass(MagLevNumber::class), $x);
+			#/src/persistence/Persistence.hx:208: characters 4-23
+			return $y->getFloat();
+		} else if ($x->getType() === MagLevType::MagLevType_Array()) {
+			#/src/persistence/Persistence.hx:211: characters 4-33
+			$y = Boot::typedCast(Boot::getClass(MagLevArray::class), $x);
+			#/src/persistence/Persistence.hx:212: characters 4-42
+			$arr = new \Array_hx();
+			#/src/persistence/Persistence.hx:213: characters 4-14
+			$i = 0;
+			#/src/persistence/Persistence.hx:214: lines 214-216
+			while ($i < $y->size()) {
+				#/src/persistence/Persistence.hx:215: characters 5-23
+				$x1 = $y->get($i);
+				$arr->arr[$arr->length++] = $x1;
+			}
+			#/src/persistence/Persistence.hx:217: characters 4-14
+			return $arr;
+		} else if ($x->getType() === MagLevType::MagLevType_Object()) {
+			#/src/persistence/Persistence.hx:220: characters 4-34
+			$y = Boot::typedCast(Boot::getClass(MagLevObject::class), $x);
+			#/src/persistence/Persistence.hx:221: characters 4-52
+			$map = new StringMap();
+			#/src/persistence/Persistence.hx:222: characters 4-24
+			$keys = $y->keys();
+			#/src/persistence/Persistence.hx:223: characters 4-14
+			$i = 0;
+			#/src/persistence/Persistence.hx:224: lines 224-227
+			while ($i < $keys->size()) {
+				#/src/persistence/Persistence.hx:225: characters 5-66
+				$key = (Boot::typedCast(Boot::getClass(MagLevString::class), $keys->get($i)))->getString();
+				#/src/persistence/Persistence.hx:226: characters 5-29
+				$value = $y->get($key);
+				$map->data[$key] = $value;
+			}
+			#/src/persistence/Persistence.hx:228: characters 4-14
+			return $map;
+		} else {
+			#/src/persistence/Persistence.hx:231: characters 4-9
+			throw Exception::thrown("convertToHaxe: unknown type");
+		}
+	}
+
+	/**
+	 * @param mixed $x
+	 * 
+	 * @return MagLevAny
+	 */
+	public function convertToMagLev ($x) {
+		#/src/persistence/Persistence.hx:236: lines 236-281
+		if ($x === null) {
+			#/src/persistence/Persistence.hx:237: characters 4-30
+			return MagLevNull::create();
+		} else if (is_bool($x)) {
+			#/src/persistence/Persistence.hx:240: characters 4-48
+			return MagLevBoolean::fromBool(Boot::typedCast(Boot::getClass('Bool'), $x));
+		} else if (is_string($x)) {
+			#/src/persistence/Persistence.hx:243: characters 4-51
+			return MagLevString::fromString(Boot::typedCast(Boot::getClass('String'), $x));
+		} else if (Boot::isOfType($x, Boot::getClass('Int'))) {
+			#/src/persistence/Persistence.hx:246: characters 4-45
+			return MagLevNumber::fromInt(Boot::typedCast(Boot::getClass('Int'), $x));
+		} else if ((is_float($x) || is_int($x))) {
+			#/src/persistence/Persistence.hx:249: characters 4-36
+			return MagLevNumber::fromFloat($x);
+		} else if (($x instanceof \Array_hx)) {
+			#/src/persistence/Persistence.hx:252: characters 4-47
+			$arr = MagLevArray::create();
+			#/src/persistence/Persistence.hx:253: characters 4-25
+			$y = $x;
+			#/src/persistence/Persistence.hx:254: lines 254-256
+			$_g = 0;
+			while ($_g < $y->length) {
+				#/src/persistence/Persistence.hx:254: characters 8-12
+				$item = ($y->arr[$_g] ?? null);
+				#/src/persistence/Persistence.hx:254: lines 254-256
+				++$_g;
+				#/src/persistence/Persistence.hx:255: characters 5-36
+				$arr->push($this->convertToMagLev($item));
+			}
+			#/src/persistence/Persistence.hx:257: characters 4-14
+			return $arr;
+		} else if (($x instanceof StringMap)) {
+			#/src/persistence/Persistence.hx:260: characters 4-32
+			$map = $x;
+			#/src/persistence/Persistence.hx:261: characters 4-49
+			$obj = MagLevObject::create();
+			#/src/persistence/Persistence.hx:262: characters 15-25
+			$key = new NativeIndexedArrayIterator(array_values(array_map("strval", array_keys($map->data))));
+			while ($key->hasNext()) {
+				#/src/persistence/Persistence.hx:262: lines 262-264
+				$key1 = $key->next();
+				#/src/persistence/Persistence.hx:263: characters 5-48
+				$obj->set($key1, $this->convertToMagLev(($map->data[$key1] ?? null)));
+			}
+			#/src/persistence/Persistence.hx:265: characters 4-14
+			return $obj;
+		} else if (\Reflect::isObject($x)) {
+			#/src/persistence/Persistence.hx:268: characters 4-49
+			$obj = MagLevObject::create();
+			#/src/persistence/Persistence.hx:269: lines 269-272
+			$_g = 0;
+			$_g1 = \Reflect::fields($x);
+			while ($_g < $_g1->length) {
+				#/src/persistence/Persistence.hx:269: characters 9-14
+				$field = ($_g1->arr[$_g] ?? null);
+				#/src/persistence/Persistence.hx:269: lines 269-272
+				++$_g;
+				#/src/persistence/Persistence.hx:270: characters 5-45
+				$val = \Reflect::getProperty($x, $field);
+				#/src/persistence/Persistence.hx:271: characters 5-41
+				$obj->set($field, $this->convertToMagLev($val));
+			}
+			#/src/persistence/Persistence.hx:273: characters 4-14
+			return $obj;
+		} else {
+			#/src/persistence/Persistence.hx:275: characters 12-33
+			$f = $x;
+			#/src/persistence/Persistence.hx:275: lines 275-281
+			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
+				#/src/persistence/Persistence.hx:276: characters 4-40
+				$f = $x;
+				#/src/persistence/Persistence.hx:277: characters 4-41
+				return MagLevFunction::fromFunction($f);
+			} else {
+				#/src/persistence/Persistence.hx:280: characters 4-9
+				throw Exception::thrown("convertToMagLev: unknown type");
+			}
+		}
 	}
 
 	/**
@@ -223,82 +389,82 @@ class Persistence {
 	 * @return mixed
 	 */
 	public function get ($recordType, $operationName, $queryValues) {
-		#/src/persistence/Persistence.hx:135: characters 7-62
+		#/src/persistence/Persistence.hx:136: characters 7-62
 		$this1 = $this->getters;
-		#/src/persistence/Persistence.hx:135: lines 135-186
+		#/src/persistence/Persistence.hx:136: lines 136-187
 		if (array_key_exists($this->calcKey($recordType, $operationName), $this1->data)) {
-			#/src/persistence/Persistence.hx:136: characters 17-70
+			#/src/persistence/Persistence.hx:137: characters 17-70
 			$this1 = $this->getters;
 			$key = $this->calcKey($recordType, $operationName);
-			#/src/persistence/Persistence.hx:136: characters 4-71
+			#/src/persistence/Persistence.hx:137: characters 4-71
 			$getter = ($this1->data[$key] ?? null);
-			#/src/persistence/Persistence.hx:138: characters 4-21
+			#/src/persistence/Persistence.hx:139: characters 4-21
 			$query = null;
-			#/src/persistence/Persistence.hx:139: characters 8-46
+			#/src/persistence/Persistence.hx:140: characters 8-46
 			$f = $getter->queryMapper;
-			#/src/persistence/Persistence.hx:139: lines 139-150
+			#/src/persistence/Persistence.hx:140: lines 140-151
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/Persistence.hx:140: characters 5-53
+				#/src/persistence/Persistence.hx:141: characters 5-53
 				$queryMapper = $getter->queryMapper;
-				#/src/persistence/Persistence.hx:141: characters 5-37
+				#/src/persistence/Persistence.hx:142: characters 5-37
 				$query = $queryMapper($queryValues);
 			} else if (is_string($getter->queryMapper)) {
-				#/src/persistence/Persistence.hx:144: characters 5-49
+				#/src/persistence/Persistence.hx:145: characters 5-49
 				$queryMapper = $getter->queryMapper;
-				#/src/persistence/Persistence.hx:146: characters 5-57
-				$query = $this->maglev->call($queryMapper, \Array_hx::wrap([$queryValues]));
+				#/src/persistence/Persistence.hx:147: characters 5-93
+				$query = $this->maglev->call($queryMapper, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev(\Array_hx::wrap([$queryValues]))));
 			} else {
-				#/src/persistence/Persistence.hx:149: characters 5-10
+				#/src/persistence/Persistence.hx:150: characters 5-10
 				throw Exception::thrown("queryMapper must be a string or function");
 			}
-			#/src/persistence/Persistence.hx:152: characters 4-26
+			#/src/persistence/Persistence.hx:153: characters 4-26
 			$raw_result = null;
-			#/src/persistence/Persistence.hx:153: characters 8-49
+			#/src/persistence/Persistence.hx:154: characters 8-49
 			$f = $getter->strategyMethod;
-			#/src/persistence/Persistence.hx:153: lines 153-167
+			#/src/persistence/Persistence.hx:154: lines 154-168
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/Persistence.hx:154: characters 5-59
+				#/src/persistence/Persistence.hx:155: characters 5-59
 				$strategyMethod = $getter->strategyMethod;
-				#/src/persistence/Persistence.hx:155: characters 5-39
+				#/src/persistence/Persistence.hx:156: characters 5-39
 				$raw_result = $strategyMethod($query);
 			} else if (is_string($getter->strategyMethod)) {
-				#/src/persistence/Persistence.hx:158: characters 5-55
+				#/src/persistence/Persistence.hx:159: characters 5-55
 				$strategyMethod = $getter->strategyMethod;
-				#/src/persistence/Persistence.hx:159: lines 159-163
+				#/src/persistence/Persistence.hx:160: lines 160-164
 				if ($getter->useQueryValuesAsParams) {
-					#/src/persistence/Persistence.hx:160: characters 6-65
-					$raw_result = $this->maglev->call($getter->strategyMethod, $query);
+					#/src/persistence/Persistence.hx:161: characters 6-101
+					$raw_result = $this->maglev->call($getter->strategyMethod, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev($query)));
 				} else {
-					#/src/persistence/Persistence.hx:162: characters 6-67
-					$raw_result = $this->maglev->call($getter->strategyMethod, \Array_hx::wrap([$query]));
+					#/src/persistence/Persistence.hx:163: characters 6-103
+					$raw_result = $this->maglev->call($getter->strategyMethod, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev(\Array_hx::wrap([$query]))));
 				}
 			} else {
-				#/src/persistence/Persistence.hx:166: characters 5-10
+				#/src/persistence/Persistence.hx:167: characters 5-10
 				throw Exception::thrown("strategyMethod must be a string or function");
 			}
-			#/src/persistence/Persistence.hx:169: characters 4-22
+			#/src/persistence/Persistence.hx:170: characters 4-22
 			$result = null;
-			#/src/persistence/Persistence.hx:170: characters 8-47
+			#/src/persistence/Persistence.hx:171: characters 8-47
 			$f = $getter->resultMapper;
-			#/src/persistence/Persistence.hx:170: lines 170-181
+			#/src/persistence/Persistence.hx:171: lines 171-182
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/Persistence.hx:171: characters 5-55
+				#/src/persistence/Persistence.hx:172: characters 5-55
 				$resultMapper = $getter->resultMapper;
-				#/src/persistence/Persistence.hx:172: characters 5-38
+				#/src/persistence/Persistence.hx:173: characters 5-38
 				$result = $resultMapper($raw_result);
 			} else if (is_string($getter->resultMapper)) {
-				#/src/persistence/Persistence.hx:175: characters 5-51
+				#/src/persistence/Persistence.hx:176: characters 5-51
 				$resultMapper = $getter->resultMapper;
-				#/src/persistence/Persistence.hx:177: characters 5-58
-				$result = $this->maglev->call($resultMapper, \Array_hx::wrap([$raw_result]));
+				#/src/persistence/Persistence.hx:178: characters 5-94
+				$result = $this->maglev->call($resultMapper, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev(\Array_hx::wrap([$raw_result]))));
 			} else {
-				#/src/persistence/Persistence.hx:180: characters 5-10
+				#/src/persistence/Persistence.hx:181: characters 5-10
 				throw Exception::thrown("resultMapper must be a string or function");
 			}
-			#/src/persistence/Persistence.hx:182: characters 4-17
+			#/src/persistence/Persistence.hx:183: characters 4-17
 			return $result;
 		} else {
-			#/src/persistence/Persistence.hx:185: characters 4-9
+			#/src/persistence/Persistence.hx:186: characters 4-9
 			throw Exception::thrown("the specified getter has not been added");
 		}
 	}
@@ -311,61 +477,61 @@ class Persistence {
 	 * @return void
 	 */
 	public function mutate ($recordType, $operationName, $recordData) {
-		#/src/persistence/Persistence.hx:95: characters 7-63
+		#/src/persistence/Persistence.hx:96: characters 7-63
 		$this1 = $this->mutators;
-		#/src/persistence/Persistence.hx:95: lines 95-131
+		#/src/persistence/Persistence.hx:96: lines 96-132
 		if (array_key_exists($this->calcKey($recordType, $operationName), $this1->data)) {
-			#/src/persistence/Persistence.hx:96: characters 18-72
+			#/src/persistence/Persistence.hx:97: characters 18-72
 			$this1 = $this->mutators;
 			$key = $this->calcKey($recordType, $operationName);
-			#/src/persistence/Persistence.hx:96: characters 4-73
+			#/src/persistence/Persistence.hx:97: characters 4-73
 			$mutator = ($this1->data[$key] ?? null);
-			#/src/persistence/Persistence.hx:98: characters 4-22
+			#/src/persistence/Persistence.hx:99: characters 4-22
 			$params = null;
-			#/src/persistence/Persistence.hx:99: characters 8-48
+			#/src/persistence/Persistence.hx:100: characters 8-48
 			$f = $mutator->updateMapper;
-			#/src/persistence/Persistence.hx:99: lines 99-110
+			#/src/persistence/Persistence.hx:100: lines 100-111
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/Persistence.hx:100: characters 5-56
+				#/src/persistence/Persistence.hx:101: characters 5-56
 				$updateMapper = $mutator->updateMapper;
-				#/src/persistence/Persistence.hx:101: characters 5-38
+				#/src/persistence/Persistence.hx:102: characters 5-38
 				$params = $updateMapper($recordData);
 			} else if (is_string($mutator->updateMapper)) {
-				#/src/persistence/Persistence.hx:104: characters 5-52
+				#/src/persistence/Persistence.hx:105: characters 5-52
 				$updateMapper = $mutator->updateMapper;
-				#/src/persistence/Persistence.hx:106: characters 5-58
-				$params = $this->maglev->call($updateMapper, \Array_hx::wrap([$recordData]));
+				#/src/persistence/Persistence.hx:107: characters 5-94
+				$params = $this->maglev->call($updateMapper, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev(\Array_hx::wrap([$recordData]))));
 			} else {
-				#/src/persistence/Persistence.hx:109: characters 5-10
+				#/src/persistence/Persistence.hx:110: characters 5-10
 				throw Exception::thrown("updateMapper must be a string or function");
 			}
-			#/src/persistence/Persistence.hx:112: characters 4-26
+			#/src/persistence/Persistence.hx:113: characters 4-26
 			$raw_result = null;
-			#/src/persistence/Persistence.hx:113: characters 8-50
+			#/src/persistence/Persistence.hx:114: characters 8-50
 			$f = $mutator->strategyMethod;
-			#/src/persistence/Persistence.hx:113: lines 113-127
+			#/src/persistence/Persistence.hx:114: lines 114-128
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/Persistence.hx:114: characters 5-60
+				#/src/persistence/Persistence.hx:115: characters 5-60
 				$strategyMethod = $mutator->strategyMethod;
-				#/src/persistence/Persistence.hx:115: characters 5-40
+				#/src/persistence/Persistence.hx:116: characters 5-40
 				$raw_result = $strategyMethod($params);
 			} else if (is_string($mutator->strategyMethod)) {
-				#/src/persistence/Persistence.hx:118: characters 5-56
+				#/src/persistence/Persistence.hx:119: characters 5-56
 				$strategyMethod = $mutator->strategyMethod;
-				#/src/persistence/Persistence.hx:119: lines 119-123
+				#/src/persistence/Persistence.hx:120: lines 120-124
 				if ($mutator->useRecordDataAsParams) {
-					#/src/persistence/Persistence.hx:120: characters 6-59
-					$raw_result = $this->maglev->call($strategyMethod, $params);
+					#/src/persistence/Persistence.hx:121: characters 6-95
+					$raw_result = $this->maglev->call($strategyMethod, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev($params)));
 				} else {
-					#/src/persistence/Persistence.hx:122: characters 6-61
-					$raw_result = $this->maglev->call($strategyMethod, \Array_hx::wrap([$params]));
+					#/src/persistence/Persistence.hx:123: characters 6-97
+					$raw_result = $this->maglev->call($strategyMethod, Boot::typedCast(Boot::getClass(MagLevArray::class), $this->convertToMagLev(\Array_hx::wrap([$params]))));
 				}
 			} else {
-				#/src/persistence/Persistence.hx:126: characters 5-10
+				#/src/persistence/Persistence.hx:127: characters 5-10
 				throw Exception::thrown("strategyMethod must be a string or function");
 			}
 		} else {
-			#/src/persistence/Persistence.hx:130: characters 4-9
+			#/src/persistence/Persistence.hx:131: characters 4-9
 			throw Exception::thrown("the specified mutator has not been added");
 		}
 	}

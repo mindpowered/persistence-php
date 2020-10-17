@@ -41,43 +41,43 @@ class Mutator {
 	 * @return void
 	 */
 	public function __construct ($recordType, $strategyMethod, $updateMapper, $useRecordDataAsParams) {
-		#/src/persistence/Persistence.hx:205: characters 7-77
+		#/src/persistence/Persistence.hx:296: characters 7-77
 		$tmp = null;
 		if (!is_string($strategyMethod)) {
-			#/src/persistence/Persistence.hx:205: characters 43-77
+			#/src/persistence/Persistence.hx:296: characters 43-77
 			$f = $strategyMethod;
-			#/src/persistence/Persistence.hx:205: characters 7-77
+			#/src/persistence/Persistence.hx:296: characters 7-77
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:205: lines 205-207
+		#/src/persistence/Persistence.hx:296: lines 296-298
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:206: characters 4-9
+			#/src/persistence/Persistence.hx:297: characters 4-9
 			throw Exception::thrown("strategyMethod must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:208: characters 7-73
+		#/src/persistence/Persistence.hx:299: characters 7-73
 		$tmp = null;
 		if (!is_string($updateMapper)) {
-			#/src/persistence/Persistence.hx:208: characters 41-73
+			#/src/persistence/Persistence.hx:299: characters 41-73
 			$f = $updateMapper;
-			#/src/persistence/Persistence.hx:208: characters 7-73
+			#/src/persistence/Persistence.hx:299: characters 7-73
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:208: lines 208-210
+		#/src/persistence/Persistence.hx:299: lines 299-301
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:209: characters 4-9
+			#/src/persistence/Persistence.hx:300: characters 4-9
 			throw Exception::thrown("updateMapper must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:211: characters 3-31
+		#/src/persistence/Persistence.hx:302: characters 3-31
 		$this->recordType = $recordType;
-		#/src/persistence/Persistence.hx:212: characters 3-39
+		#/src/persistence/Persistence.hx:303: characters 3-39
 		$this->strategyMethod = $strategyMethod;
-		#/src/persistence/Persistence.hx:213: characters 3-35
+		#/src/persistence/Persistence.hx:304: characters 3-35
 		$this->updateMapper = $updateMapper;
-		#/src/persistence/Persistence.hx:214: characters 3-53
+		#/src/persistence/Persistence.hx:305: characters 3-53
 		$this->useRecordDataAsParams = $useRecordDataAsParams;
 	}
 
