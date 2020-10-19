@@ -46,60 +46,60 @@ class Getter {
 	 * @return void
 	 */
 	public function __construct ($recordType, $strategyMethod, $queryMapper, $resultMapper, $useQueryValuesAsParams) {
-		#/src/persistence/Persistence.hx:321: characters 7-77
+		#/src/persistence/Persistence.hx:323: characters 7-77
 		$tmp = null;
 		if (!is_string($strategyMethod)) {
-			#/src/persistence/Persistence.hx:321: characters 43-77
+			#/src/persistence/Persistence.hx:323: characters 43-77
 			$f = $strategyMethod;
-			#/src/persistence/Persistence.hx:321: characters 7-77
+			#/src/persistence/Persistence.hx:323: characters 7-77
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:321: lines 321-323
+		#/src/persistence/Persistence.hx:323: lines 323-325
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:322: characters 4-9
+			#/src/persistence/Persistence.hx:324: characters 4-9
 			throw Exception::thrown("strategyMethod must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:324: characters 7-71
+		#/src/persistence/Persistence.hx:326: characters 7-71
 		$tmp = null;
 		if (!is_string($queryMapper)) {
-			#/src/persistence/Persistence.hx:324: characters 40-71
+			#/src/persistence/Persistence.hx:326: characters 40-71
 			$f = $queryMapper;
-			#/src/persistence/Persistence.hx:324: characters 7-71
+			#/src/persistence/Persistence.hx:326: characters 7-71
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:324: lines 324-326
+		#/src/persistence/Persistence.hx:326: lines 326-328
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:325: characters 4-9
+			#/src/persistence/Persistence.hx:327: characters 4-9
 			throw Exception::thrown("queryMapper must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:327: characters 7-73
+		#/src/persistence/Persistence.hx:329: characters 7-73
 		$tmp = null;
 		if (!is_string($resultMapper)) {
-			#/src/persistence/Persistence.hx:327: characters 41-73
+			#/src/persistence/Persistence.hx:329: characters 41-73
 			$f = $resultMapper;
-			#/src/persistence/Persistence.hx:327: characters 7-73
+			#/src/persistence/Persistence.hx:329: characters 7-73
 			$tmp = !(($f instanceof \Closure) || ($f instanceof HxClosure));
 		} else {
 			$tmp = false;
 		}
-		#/src/persistence/Persistence.hx:327: lines 327-329
+		#/src/persistence/Persistence.hx:329: lines 329-331
 		if ($tmp) {
-			#/src/persistence/Persistence.hx:328: characters 4-9
+			#/src/persistence/Persistence.hx:330: characters 4-9
 			throw Exception::thrown("resultMapper must be a string or function");
 		}
-		#/src/persistence/Persistence.hx:330: characters 3-31
+		#/src/persistence/Persistence.hx:332: characters 3-31
 		$this->recordType = $recordType;
-		#/src/persistence/Persistence.hx:331: characters 3-39
+		#/src/persistence/Persistence.hx:333: characters 3-39
 		$this->strategyMethod = $strategyMethod;
-		#/src/persistence/Persistence.hx:332: characters 3-33
+		#/src/persistence/Persistence.hx:334: characters 3-33
 		$this->queryMapper = $queryMapper;
-		#/src/persistence/Persistence.hx:333: characters 3-35
+		#/src/persistence/Persistence.hx:335: characters 3-35
 		$this->resultMapper = $resultMapper;
-		#/src/persistence/Persistence.hx:334: characters 3-55
+		#/src/persistence/Persistence.hx:336: characters 3-55
 		$this->useQueryValuesAsParams = $useQueryValuesAsParams;
 	}
 
