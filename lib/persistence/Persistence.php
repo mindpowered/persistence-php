@@ -12,7 +12,6 @@ use \maglev\MagLevFunction;
 use \maglev\MagLevNull;
 use \php\Boot;
 use \haxe\Exception;
-use \maglev\_MagLev\MagLevType_Impl_;
 use \maglev\MagLevResult;
 use \persistence\_Persistence\Mutator;
 use \maglev\MagLevAny;
@@ -235,25 +234,25 @@ class Persistence {
 	 */
 	public function convertToHaxe ($x) {
 		#/src/persistence/Persistence.hx:197: lines 197-236
-		if ($x->getType() === MagLevType_Impl_::$MagLevType_Null) {
+		if ($x->getType() === MagLevNull::getStaticType()) {
 			#/src/persistence/Persistence.hx:198: characters 4-15
 			return null;
-		} else if ($x->getType() === MagLevType_Impl_::$MagLevType_Boolean) {
+		} else if ($x->getType() === MagLevBoolean::getStaticType()) {
 			#/src/persistence/Persistence.hx:201: characters 4-35
 			$y = Boot::typedCast(Boot::getClass(MagLevBoolean::class), $x);
 			#/src/persistence/Persistence.hx:202: characters 4-22
 			return $y->getBool();
-		} else if ($x->getType() === MagLevType_Impl_::$MagLevType_String) {
+		} else if ($x->getType() === MagLevString::getStaticType()) {
 			#/src/persistence/Persistence.hx:205: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevString::class), $x);
 			#/src/persistence/Persistence.hx:206: characters 4-24
 			return $y->getString();
-		} else if ($x->getType() === MagLevType_Impl_::$MagLevType_Number) {
+		} else if ($x->getType() === MagLevNumber::getStaticType()) {
 			#/src/persistence/Persistence.hx:209: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevNumber::class), $x);
 			#/src/persistence/Persistence.hx:210: characters 4-23
 			return $y->getFloat();
-		} else if ($x->getType() === MagLevType_Impl_::$MagLevType_Array) {
+		} else if ($x->getType() === MagLevArray::getStaticType()) {
 			#/src/persistence/Persistence.hx:213: characters 4-33
 			$y = Boot::typedCast(Boot::getClass(MagLevArray::class), $x);
 			#/src/persistence/Persistence.hx:214: characters 4-42
@@ -270,7 +269,7 @@ class Persistence {
 			}
 			#/src/persistence/Persistence.hx:220: characters 4-14
 			return $arr;
-		} else if ($x->getType() === MagLevType_Impl_::$MagLevType_Object) {
+		} else if ($x->getType() === MagLevObject::getStaticType()) {
 			#/src/persistence/Persistence.hx:223: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevObject::class), $x);
 			#/src/persistence/Persistence.hx:224: characters 4-52
