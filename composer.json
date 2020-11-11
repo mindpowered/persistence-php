@@ -1,13 +1,13 @@
 {
     "name": "mindpowered/persistence",
-    "version": "0.0.25",
+    "version": "0.0.26",
     "description": "Persistence",
     "license": "CPAL-1.0",
     "autoload": {
         "psr-4": {
             "haxe\\": "lib/haxe/",
             "persistence\\": "lib/persistence/",
-            "mindpowered\\wrappers\\": "lib/wrappers/",
+            "mindpowered\\persistence\\": "lib/wrappers/",
             "php\\": "lib/php/",
             "": "lib/"
         }
