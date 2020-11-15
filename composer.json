@@ -1,6 +1,6 @@
 {
     "name": "mindpowered/persistence",
-    "version": "0.0.26",
+    "version": "0.1.0",
     "description": "Persistence",
     "license": "CPAL-1.0",
     "autoload": {
