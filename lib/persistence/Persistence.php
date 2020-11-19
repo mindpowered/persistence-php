@@ -468,8 +468,8 @@ class Persistence {
 		if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
 			#/src/persistence/Persistence.hx:225: characters 4-58
 			$strategyMethod = $getter->strategyMethod;
-			#/src/persistence/Persistence.hx:226: characters 4-35
-			$callback($strategyMethod(Boot::getInstanceClosure($this, 'query')));
+			#/src/persistence/Persistence.hx:226: characters 4-41
+			$callback($strategyMethod($queryValues));
 		} else if (is_string($getter->strategyMethod)) {
 			#/src/persistence/Persistence.hx:229: characters 4-54
 			$strategyMethod = $getter->strategyMethod;
