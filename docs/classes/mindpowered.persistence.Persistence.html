@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-535388500"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1679369701"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-535388500" class="accordion-body collapse in">
+            <div id="namespace-1679369701" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2140739865"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-566548953"></a>
                                 <a href="../namespaces/mindpowered.html" style="margin-left: 30px; padding-left: 0">mindpowered</a>
             </div>
-            <div id="namespace-2140739865" class="accordion-body collapse ">
+            <div id="namespace-566548953" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-596441809"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1237752580"></a>
                                 <a href="../namespaces/mindpowered.persistence.html" style="margin-left: 30px; padding-left: 0">persistence</a>
             </div>
-            <div id="namespace-596441809" class="accordion-body collapse ">
+            <div id="namespace-1237752580" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -330,34 +330,34 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
             <article class="method">
                 <h3 class="public ">AddMutator()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddMutator(\mindpowered\persistence\unknown_type  <span class="argument">$recordType</span>, \mindpowered\persistence\unknown_type  <span class="argument">$operationName</span>, \mindpowered\persistence\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\persistence\unknown_type  <span class="argument">$updateMapper</span>, \mindpowered\persistence\unknown_type  <span class="argument">$useRecordDataAsParams</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">AddMutator(string  <span class="argument">$recordType</span>, string  <span class="argument">$operationName</span>, mixed  <span class="argument">$strategyMethod</span>, mixed  <span class="argument">$updateMapper</span>, boolean  <span class="argument">$useRecordDataAsParams</span>) : void</pre>
                 <p><em>Set up a Mutator to change stored data</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$recordType </td>
                                 <td><p>type of record being changed (eg. databsae table name)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$operationName </td>
                                 <td><p>action being performed on the record (eg. insert, update)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$strategyMethod </td>
                                 <td><p>method to call to actually perform the mutation</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$updateMapper </td>
                                 <td><p>method to call on recordData before calling strategyMethod with the results</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>boolean</td>
                                 <td>$useRecordDataAsParams </td>
                                 <td><p>if set to true, the recordData will be passed as the arguments to strategyMethod, rather than as the first argument</p></td>
                             </tr>
@@ -386,39 +386,39 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
             <article class="method">
                 <h3 class="public ">AddGetter()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">AddGetter(\mindpowered\persistence\unknown_type  <span class="argument">$recordType</span>, \mindpowered\persistence\unknown_type  <span class="argument">$operationName</span>, \mindpowered\persistence\unknown_type  <span class="argument">$strategyMethod</span>, \mindpowered\persistence\unknown_type  <span class="argument">$queryMapper</span>, \mindpowered\persistence\unknown_type  <span class="argument">$resultMapper</span>, \mindpowered\persistence\unknown_type  <span class="argument">$useQueryValuesAsParams</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">AddGetter(string  <span class="argument">$recordType</span>, string  <span class="argument">$operationName</span>, mixed  <span class="argument">$strategyMethod</span>, mixed  <span class="argument">$queryMapper</span>, mixed  <span class="argument">$resultMapper</span>, boolean  <span class="argument">$useQueryValuesAsParams</span>) : void</pre>
                 <p><em>Set up a Getter to retrieve data</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$recordType </td>
                                 <td><p>type of record being retrieved (eg. databsae table name)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$operationName </td>
                                 <td><p>query being performed for the record type (eg. findById, findByName, findActive, getInsertedId)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$strategyMethod </td>
                                 <td><p>method to call to actually perform the data retrieval</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$queryMapper </td>
                                 <td><p>method to call on queryValues before calling strategyMethod with the results</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$resultMapper </td>
                                 <td><p>method to call on data returned from the strategyMethod before returning the results</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>boolean</td>
                                 <td>$useQueryValuesAsParams </td>
                                 <td><p>if set to true, the queryValues will be passed as the arguments to strategyMethod, rather than as the first argument</p></td>
                             </tr>
@@ -447,24 +447,24 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
             <article class="method">
                 <h3 class="public ">Mutate()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">Mutate(\mindpowered\persistence\unknown_type  <span class="argument">$recordType</span>, \mindpowered\persistence\unknown_type  <span class="argument">$operationName</span>, \mindpowered\persistence\unknown_type  <span class="argument">$recordData</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">Mutate(string  <span class="argument">$recordType</span>, string  <span class="argument">$operationName</span>, mixed  <span class="argument">$recordData</span>) : void</pre>
                 <p><em>Use a Mutator to change stored data</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$recordType </td>
                                 <td><p>type of record being changed (eg. databsae table name)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$operationName </td>
                                 <td><p>action being performed on the record (eg. insert, update)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$recordData </td>
                                 <td><p>data being updated or saved by passing through updateMapper and then strategyMethod</p></td>
                             </tr>
@@ -493,24 +493,24 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
             <article class="method">
                 <h3 class="public ">Get()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">Get(\mindpowered\persistence\unknown_type  <span class="argument">$recordType</span>, \mindpowered\persistence\unknown_type  <span class="argument">$operationName</span>, \mindpowered\persistence\unknown_type  <span class="argument">$queryValues</span>) : \mindpowered\persistence\...</pre>
+                <pre class="signature" style="margin-right: 54px;">Get(string  <span class="argument">$recordType</span>, string  <span class="argument">$operationName</span>, mixed  <span class="argument">$queryValues</span>) : mixed</pre>
                 <p><em>Use a Getter to retrieve data</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$recordType </td>
                                 <td><p>type of record being retrieved (eg. databsae table name)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>string</td>
                                 <td>$operationName </td>
                                 <td><p>query being performed for the record type (eg. findById, findByName, findActive, getInsertedId)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mindpowered\persistence\unknown_type</td>
+                                <td>mixed</td>
                                 <td>$queryValues </td>
                                 <td><p>values that will be passed through queryMapper and then strategyMethod to perform the query</p></td>
                             </tr>
@@ -518,7 +518,8 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
                 
                 
                                     <h4>Returns</h4>
-                    \mindpowered\persistence\...
+                    mixed
+                                            &mdash; <p>result from the getter after being passed through resultMapper</p>
                                     
                             </article>
         </div>
@@ -585,7 +586,7 @@ Note: when using a mapping (updateMapper, queryMapper, resultMapper), the data w
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 19th, 2020 at 06:35.
+                    on November 20th, 2020 at 00:32.
                 </section>
             </section>
         </section>

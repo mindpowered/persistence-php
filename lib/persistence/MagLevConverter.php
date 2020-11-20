@@ -27,95 +27,99 @@ class MagLevConverter {
 	 * @return mixed
 	 */
 	public static function convertToHaxe ($x) {
-		#/src/persistence/MagLevConverter.hx:14: lines 14-69
+		#/src/persistence/MagLevConverter.hx:16: lines 16-73
 		if ($x->getType() === MagLevNull::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:15: characters 4-15
+			#/src/persistence/MagLevConverter.hx:17: characters 4-15
 			return null;
 		} else if ($x->getType() === MagLevBoolean::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:18: characters 4-35
+			#/src/persistence/MagLevConverter.hx:20: characters 4-35
 			$y = Boot::typedCast(Boot::getClass(MagLevBoolean::class), $x);
-			#/src/persistence/MagLevConverter.hx:19: characters 4-22
+			#/src/persistence/MagLevConverter.hx:21: characters 4-22
 			return $y->getBool();
 		} else if ($x->getType() === MagLevString::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:22: characters 4-34
+			#/src/persistence/MagLevConverter.hx:24: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevString::class), $x);
-			#/src/persistence/MagLevConverter.hx:23: characters 4-24
+			#/src/persistence/MagLevConverter.hx:25: characters 4-24
 			return $y->getString();
 		} else if ($x->getType() === MagLevNumber::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:26: characters 4-34
+			#/src/persistence/MagLevConverter.hx:28: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevNumber::class), $x);
-			#/src/persistence/MagLevConverter.hx:27: characters 4-23
+			#/src/persistence/MagLevConverter.hx:29: characters 4-23
 			return $y->getFloat();
 		} else if ($x->getType() === MagLevArray::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:30: characters 4-33
+			#/src/persistence/MagLevConverter.hx:32: characters 4-33
 			$y = Boot::typedCast(Boot::getClass(MagLevArray::class), $x);
-			#/src/persistence/MagLevConverter.hx:31: characters 4-42
+			#/src/persistence/MagLevConverter.hx:33: characters 4-42
 			$arr = new \Array_hx();
-			#/src/persistence/MagLevConverter.hx:32: characters 4-14
+			#/src/persistence/MagLevConverter.hx:34: characters 4-14
 			$i = 0;
-			#/src/persistence/MagLevConverter.hx:33: lines 33-36
+			#/src/persistence/MagLevConverter.hx:35: lines 35-38
 			while ($i < $y->size()) {
-				#/src/persistence/MagLevConverter.hx:34: characters 5-38
+				#/src/persistence/MagLevConverter.hx:36: characters 5-38
 				$x1 = MagLevConverter::convertToHaxe($y->get($i));
 				$arr->arr[$arr->length++] = $x1;
-				#/src/persistence/MagLevConverter.hx:35: characters 5-8
+				#/src/persistence/MagLevConverter.hx:37: characters 5-8
 				++$i;
 			}
-			#/src/persistence/MagLevConverter.hx:37: characters 4-14
+			#/src/persistence/MagLevConverter.hx:39: characters 4-14
 			return $arr;
 		} else if ($x->getType() === MagLevObject::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:40: characters 4-34
+			#/src/persistence/MagLevConverter.hx:42: characters 4-34
 			$y = Boot::typedCast(Boot::getClass(MagLevObject::class), $x);
-			#/src/persistence/MagLevConverter.hx:41: characters 4-52
+			#/src/persistence/MagLevConverter.hx:43: characters 4-52
 			$map = new StringMap();
-			#/src/persistence/MagLevConverter.hx:42: characters 4-24
+			#/src/persistence/MagLevConverter.hx:44: characters 4-24
 			$keys = $y->keys();
-			#/src/persistence/MagLevConverter.hx:43: characters 4-14
+			#/src/persistence/MagLevConverter.hx:45: characters 4-14
 			$i = 0;
-			#/src/persistence/MagLevConverter.hx:44: lines 44-48
+			#/src/persistence/MagLevConverter.hx:46: lines 46-50
 			while ($i < $keys->size()) {
-				#/src/persistence/MagLevConverter.hx:45: characters 5-66
+				#/src/persistence/MagLevConverter.hx:47: characters 5-66
 				$key = (Boot::typedCast(Boot::getClass(MagLevString::class), $keys->get($i)))->getString();
-				#/src/persistence/MagLevConverter.hx:46: characters 5-44
+				#/src/persistence/MagLevConverter.hx:48: characters 5-44
 				$value = MagLevConverter::convertToHaxe($y->get($key));
 				$map->data[$key] = $value;
-				#/src/persistence/MagLevConverter.hx:47: characters 5-8
+				#/src/persistence/MagLevConverter.hx:49: characters 5-8
 				++$i;
 			}
-			#/src/persistence/MagLevConverter.hx:49: characters 4-14
+			#/src/persistence/MagLevConverter.hx:51: characters 4-14
 			return $map;
 		} else if ($x->getType() === MagLevFunction::getStaticType()) {
-			#/src/persistence/MagLevConverter.hx:52: characters 4-36
+			#/src/persistence/MagLevConverter.hx:54: characters 4-36
 			$y = Boot::typedCast(Boot::getClass(MagLevFunction::class), $x);
-			#/src/persistence/MagLevConverter.hx:53: lines 53-64
-			$f = function ($args) use (&$y) {
-				#/src/persistence/MagLevConverter.hx:54: characters 17-60
+			#/src/persistence/MagLevConverter.hx:55: lines 55-68
+			$f = function ($args, $callback) use (&$y) {
+				#/src/persistence/MagLevConverter.hx:56: characters 17-60
 				$arr = MagLevArray::create();
-				#/src/persistence/MagLevConverter.hx:55: lines 55-57
+				#/src/persistence/MagLevConverter.hx:57: lines 57-59
 				$_g = 0;
 				while ($_g < $args->length) {
-					#/src/persistence/MagLevConverter.hx:55: characters 21-24
+					#/src/persistence/MagLevConverter.hx:57: characters 21-24
 					$arg = ($args->arr[$_g] ?? null);
-					#/src/persistence/MagLevConverter.hx:55: lines 55-57
+					#/src/persistence/MagLevConverter.hx:57: lines 57-59
 					++$_g;
-					#/src/persistence/MagLevConverter.hx:56: characters 21-67
+					#/src/persistence/MagLevConverter.hx:58: characters 21-67
 					$arr->push(MagLevConverter::convertToMagLev($arg));
 				}
-				#/src/persistence/MagLevConverter.hx:58: characters 17-52
+				#/src/persistence/MagLevConverter.hx:60: characters 17-52
 				$ret = $y->call($arr);
-				#/src/persistence/MagLevConverter.hx:59: lines 59-63
-				if ($ret->isError()) {
-					#/src/persistence/MagLevConverter.hx:60: characters 21-26
+				#/src/persistence/MagLevConverter.hx:61: lines 61-63
+				$ret->onError(function ($error) use (&$ret) {
+					#/src/persistence/MagLevConverter.hx:62: characters 21-26
 					throw Exception::thrown($ret->getError()->getMessage());
-				} else {
-					#/src/persistence/MagLevConverter.hx:62: characters 21-74
-					return MagLevConverter::convertToHaxe($ret->getResult());
-				}
+				});
+				#/src/persistence/MagLevConverter.hx:64: lines 64-67
+				$ret->onResult(function ($result) use (&$callback) {
+					#/src/persistence/MagLevConverter.hx:65: characters 6-53
+					$callback(MagLevConverter::convertToHaxe($result));
+					#/src/persistence/MagLevConverter.hx:66: characters 6-57
+					return MagLevResult::fromResult(MagLevNull::create());
+				});
 			};
-			#/src/persistence/MagLevConverter.hx:65: characters 13-21
+			#/src/persistence/MagLevConverter.hx:69: characters 13-21
 			return $f;
 		} else {
-			#/src/persistence/MagLevConverter.hx:68: characters 4-9
+			#/src/persistence/MagLevConverter.hx:72: characters 4-9
 			throw Exception::thrown("convertToHaxe: unknown type");
 		}
 	}
@@ -126,92 +130,99 @@ class MagLevConverter {
 	 * @return MagLevAny
 	 */
 	public static function convertToMagLev ($x) {
-		#/src/persistence/MagLevConverter.hx:73: lines 73-123
+		#/src/persistence/MagLevConverter.hx:77: lines 77-131
 		if ($x === null) {
-			#/src/persistence/MagLevConverter.hx:74: characters 13-39
+			#/src/persistence/MagLevConverter.hx:78: characters 13-39
 			return MagLevNull::create();
 		} else if (is_bool($x)) {
-			#/src/persistence/MagLevConverter.hx:77: characters 13-57
+			#/src/persistence/MagLevConverter.hx:81: characters 13-57
 			return MagLevBoolean::fromBool(Boot::typedCast(Boot::getClass('Bool'), $x));
 		} else if (is_string($x)) {
-			#/src/persistence/MagLevConverter.hx:80: characters 13-60
+			#/src/persistence/MagLevConverter.hx:84: characters 13-60
 			return MagLevString::fromString(Boot::typedCast(Boot::getClass('String'), $x));
 		} else if (Boot::isOfType($x, Boot::getClass('Int'))) {
-			#/src/persistence/MagLevConverter.hx:83: characters 13-54
+			#/src/persistence/MagLevConverter.hx:87: characters 13-54
 			return MagLevNumber::fromInt(Boot::typedCast(Boot::getClass('Int'), $x));
 		} else if ((is_float($x) || is_int($x))) {
-			#/src/persistence/MagLevConverter.hx:86: characters 13-45
+			#/src/persistence/MagLevConverter.hx:90: characters 13-45
 			return MagLevNumber::fromFloat($x);
 		} else {
-			#/src/persistence/MagLevConverter.hx:88: characters 18-39
+			#/src/persistence/MagLevConverter.hx:92: characters 18-39
 			$f = $x;
-			#/src/persistence/MagLevConverter.hx:88: lines 88-123
+			#/src/persistence/MagLevConverter.hx:92: lines 92-131
 			if (($f instanceof \Closure) || ($f instanceof HxClosure)) {
-				#/src/persistence/MagLevConverter.hx:89: lines 89-94
+				#/src/persistence/MagLevConverter.hx:93: lines 93-102
 				$f = function ($args) use (&$x) {
-					#/src/persistence/MagLevConverter.hx:90: characters 17-36
+					#/src/persistence/MagLevConverter.hx:94: characters 17-66
 					$y = $x;
-					#/src/persistence/MagLevConverter.hx:91: characters 17-52
+					#/src/persistence/MagLevConverter.hx:95: characters 17-52
 					$haxeArgs = MagLevConverter::convertToHaxe($args);
-					#/src/persistence/MagLevConverter.hx:92: characters 17-43
-					$haxeRet = $y($haxeArgs);
-					#/src/persistence/MagLevConverter.hx:93: characters 17-73
-					return MagLevResult::fromResult(MagLevConverter::convertToMagLev($haxeRet));
+					#/src/persistence/MagLevConverter.hx:96: characters 5-53
+					$r = MagLevResult::createAsync();
+					#/src/persistence/MagLevConverter.hx:97: lines 97-100
+					$y($haxeArgs, function ($haxeRet) use (&$r) {
+						#/src/persistence/MagLevConverter.hx:98: characters 6-43
+						$r->setResult(MagLevConverter::convertToMagLev($haxeRet));
+						#/src/persistence/MagLevConverter.hx:99: characters 6-57
+						return MagLevResult::fromResult(MagLevNull::create());
+					});
+					#/src/persistence/MagLevConverter.hx:101: characters 17-25
+					return $r;
 				};
-				#/src/persistence/MagLevConverter.hx:95: characters 13-50
+				#/src/persistence/MagLevConverter.hx:103: characters 13-50
 				return MagLevFunction::fromFunction($f);
 			} else if (($x instanceof \Array_hx)) {
-				#/src/persistence/MagLevConverter.hx:98: characters 13-56
+				#/src/persistence/MagLevConverter.hx:106: characters 13-56
 				$arr = MagLevArray::create();
-				#/src/persistence/MagLevConverter.hx:99: characters 13-34
+				#/src/persistence/MagLevConverter.hx:107: characters 13-34
 				$y = $x;
-				#/src/persistence/MagLevConverter.hx:100: lines 100-102
+				#/src/persistence/MagLevConverter.hx:108: lines 108-110
 				$_g = 0;
 				while ($_g < $y->length) {
-					#/src/persistence/MagLevConverter.hx:100: characters 17-21
+					#/src/persistence/MagLevConverter.hx:108: characters 17-21
 					$item = ($y->arr[$_g] ?? null);
-					#/src/persistence/MagLevConverter.hx:100: lines 100-102
+					#/src/persistence/MagLevConverter.hx:108: lines 108-110
 					++$_g;
-					#/src/persistence/MagLevConverter.hx:101: characters 17-48
+					#/src/persistence/MagLevConverter.hx:109: characters 17-48
 					$arr->push(MagLevConverter::convertToMagLev($item));
 				}
-				#/src/persistence/MagLevConverter.hx:103: characters 13-23
+				#/src/persistence/MagLevConverter.hx:111: characters 13-23
 				return $arr;
 			} else if (($x instanceof StringMap)) {
-				#/src/persistence/MagLevConverter.hx:106: characters 13-41
+				#/src/persistence/MagLevConverter.hx:114: characters 13-41
 				$map = $x;
-				#/src/persistence/MagLevConverter.hx:107: characters 13-58
+				#/src/persistence/MagLevConverter.hx:115: characters 13-58
 				$obj = MagLevObject::create();
-				#/src/persistence/MagLevConverter.hx:108: characters 24-34
+				#/src/persistence/MagLevConverter.hx:116: characters 24-34
 				$key = new NativeIndexedArrayIterator(array_values(array_map("strval", array_keys($map->data))));
 				while ($key->hasNext()) {
-					#/src/persistence/MagLevConverter.hx:108: lines 108-110
+					#/src/persistence/MagLevConverter.hx:116: lines 116-118
 					$key1 = $key->next();
-					#/src/persistence/MagLevConverter.hx:109: characters 17-60
+					#/src/persistence/MagLevConverter.hx:117: characters 17-60
 					$obj->set($key1, MagLevConverter::convertToMagLev(($map->data[$key1] ?? null)));
-				}
-				#/src/persistence/MagLevConverter.hx:111: characters 13-23
-				return $obj;
-			} else if (\Reflect::isObject($x)) {
-				#/src/persistence/MagLevConverter.hx:114: characters 13-58
-				$obj = MagLevObject::create();
-				#/src/persistence/MagLevConverter.hx:115: lines 115-118
-				$_g = 0;
-				$_g1 = \Reflect::fields($x);
-				while ($_g < $_g1->length) {
-					#/src/persistence/MagLevConverter.hx:115: characters 18-23
-					$field = ($_g1->arr[$_g] ?? null);
-					#/src/persistence/MagLevConverter.hx:115: lines 115-118
-					++$_g;
-					#/src/persistence/MagLevConverter.hx:116: characters 17-57
-					$val = \Reflect::getProperty($x, $field);
-					#/src/persistence/MagLevConverter.hx:117: characters 17-53
-					$obj->set($field, MagLevConverter::convertToMagLev($val));
 				}
 				#/src/persistence/MagLevConverter.hx:119: characters 13-23
 				return $obj;
+			} else if (\Reflect::isObject($x)) {
+				#/src/persistence/MagLevConverter.hx:122: characters 13-58
+				$obj = MagLevObject::create();
+				#/src/persistence/MagLevConverter.hx:123: lines 123-126
+				$_g = 0;
+				$_g1 = \Reflect::fields($x);
+				while ($_g < $_g1->length) {
+					#/src/persistence/MagLevConverter.hx:123: characters 18-23
+					$field = ($_g1->arr[$_g] ?? null);
+					#/src/persistence/MagLevConverter.hx:123: lines 123-126
+					++$_g;
+					#/src/persistence/MagLevConverter.hx:124: characters 17-57
+					$val = \Reflect::getProperty($x, $field);
+					#/src/persistence/MagLevConverter.hx:125: characters 17-53
+					$obj->set($field, MagLevConverter::convertToMagLev($val));
+				}
+				#/src/persistence/MagLevConverter.hx:127: characters 13-23
+				return $obj;
 			} else {
-				#/src/persistence/MagLevConverter.hx:122: characters 13-18
+				#/src/persistence/MagLevConverter.hx:130: characters 13-18
 				throw Exception::thrown("convertToMagLev: unknown type");
 			}
 		}
